@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1>Home Page</h1>
+<!--<p>Hello {{current}}</p>-->
+<form class="row g-3" method="post" enctype="multipart/form-data">
+  <div class="m-auto" align="center">
+    <label class="lead">Make a post</label>
+    <input
+      type="text"
+      placeholder="What's on your mind?"
+      class="form-control w-50"
+      name="post"
+      required
+    />
+    <input
+      type="file"
+      ,
+      class="file-upload-input m-auto"
+      accept="Image/*"
+      name="img"
+    />
+    <button type="submit" class="btn btn-primary m-3">Post</button>
+  </div>
+</form>
+<div class="m-auto w-50">
+  {% for post in data %}
+  <section class="bg-light p-4 my-5 border">
+    <p class="lead px-3 py-1 fw-bold">{{ post.date }} - {{ user.email }}</p>
+    <p class="lead px-3 py-1">{{ post.content }}</p>
+    <img
+      src="data:{{post.mimetype}};base64,{{post.img}}"
+      alt="No image"
+      class="img-fluid"
+    />
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}
